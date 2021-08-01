@@ -1,2 +1,3 @@
-media_viewer/bin/*
-/bin/
+bin/
+settings/
+default_storage/
