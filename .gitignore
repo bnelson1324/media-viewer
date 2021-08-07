@@ -1,3 +1,4 @@
 bin/
 /settings/
 default_storage/
+/target/
