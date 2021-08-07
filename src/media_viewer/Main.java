@@ -1,6 +1,6 @@
 package media_viewer;
 
-import gui.GUIManager;
+import display.HTMLDisplay;
 import media_control.MediaHandler;
 import settings.SettingsHandler;
 
@@ -15,7 +15,7 @@ public class Main {
 		MediaHandler.setUpStorageFolder();
 		MediaHandler.setUpMediaStorageFile();
 		MediaHandler.init();
-		GUIManager.init();
+		HTMLDisplay.init();
 	}
 	
 }

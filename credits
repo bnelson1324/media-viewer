@@ -1,4 +1,2 @@
 This project uses:
 gson https://github.com/google/gson which is licensed under the Apache License 2.0
-A WrapLayout class written by Rob Camick  https://tips4java.wordpress.com/2008/11/06/wrap-layout/
-JavaFX by Gluon https://gluonhq.com/products/javafx/ which is licensed under GPL v2 + Classpath Exception(http://openjdk.java.net/legal/gplv2+ce.html)

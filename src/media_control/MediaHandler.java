@@ -12,7 +12,6 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import gui.components.ConfirmationWindow;
 import media.MediaData;
 import settings.SettingsHandler;
 
@@ -108,7 +107,7 @@ public class MediaHandler {
 					passingMediaItems.add(p);
 				}
 			} catch (ScriptException e) {
-				ConfirmationWindow cw = new ConfirmationWindow("Alert", "Invalid search", "Ok");
+				// !! todo: create a js alert saying "invlid search"
 				return new ArrayList<Path>();
 			}
 		}
