@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Media Viewer</title>
+		<link href="style.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div id="header">
+			<h1>Media Viewer</h1>
+			<br>
+			<a href="/">Home</a>
+			<a href="/search">Search</a>
+			<a href="/view">View</a>
+			<a href="/modifytags">Modify Tags</a>
+			<a href="/settings">Settings</a>
+			<a href="/help">Help</a>
+		</div>
+
+
+		<div id="content">
+			<input type="search" id="searchBar">
+			<button onclick="search()">Search</button>
+
+			<!--after a search, get images from server, then use addImageToDisplay() on it -->
+			<br>
+			<button onclick="addImageToDisplay('walter.png')">Add</button>
+
+			<div id="searchDisplay">
+				<p>Display</p>
+			</div>
+		</div>
+
+		<script>
+			function search() {
+				var query = document.getElementById("searchBar").value;
+				window.location.href = "/search?q=" + query;
+			}
+
+			function addImageToDisplay(path) {
+				var display = document.getElementById("searchDisplay");
+
+				var template = document.getElementById("mediaBoxTemplate").content.cloneNode(true);
+				var mediaBox = getChildByClass(template, "mediaBox");
+
+				var mediaText = getChildByClass(mediaBox, "mediaText");
+				mediaText.innerHTML = path;
+
+				var mediaImage = getChildByClass(mediaBox, "mediaImage");
+				mediaImage.src = path;
+
+				display.appendChild(template);
+			}
+
+			function getChildByClass(parent, theClassName) {
+				for(var i = 0; i < parent.childNodes.length; i++) {
+					if(parent.childNodes[i].className == theClassName) {
+						return parent.childNodes[i];
+					}
+				}
+			}
+		</script>
+
+		<template id="mediaBoxTemplate">
+			<div class="mediaBox">
+				<p class="mediaText"></p>
+				<img class="mediaImage"></div>
+			</div>
+		</template>
+
+	</body>
+</html>
