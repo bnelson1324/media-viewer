@@ -29,6 +29,7 @@ public class HTMLDisplay {
 	private static void initServer() {
 		app = Javalin.create( config -> {
 			config.addStaticFiles("/pages");
+			config.addStaticFiles("/storage_root");
 		}).start(port);
 		
 		// which pages to render

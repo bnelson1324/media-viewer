@@ -25,6 +25,8 @@ public class MediaHandler {
 	// pairs file path with a media object
 	private static HashMap<Path, MediaData> allMediaData;
 	
+	// root storage folder location
+	public final static String ROOT_STORAGE_FOLDER_LOC = "storage/storage_root";
 	
 	// used to parse searches
 	private static ScriptEngineManager sem;
@@ -37,7 +39,7 @@ public class MediaHandler {
 	
 	public static Path getFullRelativePath(Path mediaItem, boolean itemInStorageFolder) {
 		if(itemInStorageFolder) {
-			return Paths.get(SettingsHandler.getSetting("rootStorageFolderLoc") + "\\" + mediaItem);
+			return Paths.get(ROOT_STORAGE_FOLDER_LOC + "\\" + mediaItem);
 		} else {
 			return mediaItem;
 		}
@@ -47,7 +49,7 @@ public class MediaHandler {
 		int lengthOfPathWithoutMediaItem = mediaItem.toString().length()-mediaItem.getFileName().toString().length();
 		String fileLoc = mediaItem.toString().substring(0, lengthOfPathWithoutMediaItem);
 		if(itemInStorageFolder) {
-			return Paths.get(SettingsHandler.getSetting("rootStorageFolderLoc") + "\\" + fileLoc);
+			return Paths.get(ROOT_STORAGE_FOLDER_LOC + "\\" + fileLoc);
 		} else {
 			return Paths.get(fileLoc);
 		}
@@ -150,7 +152,7 @@ public class MediaHandler {
 	
 	public static void setUpStorageFolder() {
 		// creates storage directory if it doesn't exist
-		File rootStorageFolder = new File(SettingsHandler.getSetting("rootStorageFolderLoc"));
+		File rootStorageFolder = new File(ROOT_STORAGE_FOLDER_LOC);
 		if(!rootStorageFolder.exists()) {
 			rootStorageFolder.mkdir();
 		}

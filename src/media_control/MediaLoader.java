@@ -38,7 +38,7 @@ public class MediaLoader {
 	private static void loadMediaItems() {
 		// finds every file from the root storage folder
 		
-		Path rootStorageFolder = Paths.get(SettingsHandler.getSetting("rootStorageFolderLoc"));
+		Path rootStorageFolder = Paths.get(MediaHandler.ROOT_STORAGE_FOLDER_LOC);
 		ArrayList<Path> allFiles = new ArrayList<Path>();
 		fetchFiles(rootStorageFolder.toFile(), allFiles);
 		
