@@ -20,8 +20,6 @@
 		<div id="content">
 			<input type="search" id="searchBar">
 			<button onclick="search()">Search</button>
-
-			<!--after a search, get images from server, then use addImageToDisplay() on it -->
 			<br>
 			<button onclick="addImageToDisplay('walter.png')">Add</button>
 
@@ -31,9 +29,39 @@
 		</div>
 
 		<script>
+			document.getElementById('searchBar').onkeydown = function(event) {
+			    if (event.keyCode == 13) {
+			        search();
+			    }
+			}
+			// redirects user to the right page to search
 			function search() {
 				var query = document.getElementById("searchBar").value;
 				window.location.href = "/search?q=" + query;
+			}
+
+			window.onload = onLoadSearch();
+			// search function called whenever the page loads
+			function onLoadSearch() { // !! todo: fix this function so it works with &&, ||, and ! operators 
+				var urlSearchParams = new URLSearchParams(window.location.search);
+				var query = urlSearchParams.get("q");
+				if(query != null) {
+				var req = new XMLHttpRequest();
+					req.open("GET", "/searchresults?q=" + query);
+					req.send();
+					req.onreadystatechange=(e)=>{
+						if(req.readyState == 4) {
+							var jsonResult = JSON.parse(req.responseText);
+							for(var i = 0; i < jsonResult.mediaItems.length; i++) {
+								var mediaItem = jsonResult.mediaItems[i];
+								addImageToDisplay(mediaItem.path);
+							}
+
+							// !! todo: get url of images from browser, then add them to the display using addImageToDisplay
+							// !! create a function to do the above using the same json format
+						}
+					}
+				}
 			}
 
 			function addImageToDisplay(path) {
@@ -50,15 +78,9 @@
 
 				display.appendChild(template);
 			}
-
-			function getChildByClass(parent, theClassName) {
-				for(var i = 0; i < parent.childNodes.length; i++) {
-					if(parent.childNodes[i].className == theClassName) {
-						return parent.childNodes[i];
-					}
-				}
-			}
 		</script>
+
+		<script src="scripts.js"></script>
 
 		<template id="mediaBoxTemplate">
 			<div class="mediaBox">

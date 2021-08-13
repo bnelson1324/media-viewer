@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.swing.text.html.HTMLDocument;
-
 import io.javalin.Javalin;
 
 public class HTMLDisplay {
@@ -43,14 +41,16 @@ public class HTMLDisplay {
 		// search page
 		app.get("/search", ctx -> {
 			ctx.render("/pages/search.html");
+		});
+		app.get("/searchresults", ctx -> {
+			// responds to AJAX requests from javascript
 			String query = ctx.queryParam("q");
-			if(query == null) {
-				return;
-			} else {
-				System.out.println("search: " + query);
-				ctx.json("boog");
-				// !! todo: mb send json full of images that the browser should render, mb using ctx.json with an array of paths
-			}
+			HTTPHandler.handleSearch(ctx, query);
+		});
+		app.get("/requestfile", ctx -> {
+			// returns a file from the server based on user's request
+			String path = ctx.queryParam("path");
+			HTTPHandler.requestFile(ctx, path);
 		});
 	}
 	

@@ -107,7 +107,6 @@ public class MediaHandler {
 					passingMediaItems.add(p);
 				}
 			} catch (ScriptException e) {
-				// !! todo: create a js alert saying "invlid search"
 				return new ArrayList<Path>();
 			}
 		}

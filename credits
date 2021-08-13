@@ -1,3 +1,4 @@
 This project uses:
 gson https://github.com/google/gson which is licensed under the Apache License 2.0
 Javalin https://javalin.io/ which is licensed under the Apache License 2.0
+Jackson https://github.com/FasterXML/jackson which is licensed under the Apache License 2.0
