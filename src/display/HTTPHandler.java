@@ -1,6 +1,5 @@
 package display;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
@@ -36,11 +35,5 @@ public class HTTPHandler {
 			}
 		}
 	}
-
-	public static void requestFile(Context ctx, String pathStr) {
-		File file = new File(pathStr);
-		//ctx.result(walter.png);
-	}
-	
 	
 }

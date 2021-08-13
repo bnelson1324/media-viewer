@@ -47,11 +47,6 @@ public class HTMLDisplay {
 			String query = ctx.queryParam("q");
 			HTTPHandler.handleSearch(ctx, query);
 		});
-		app.get("/requestfile", ctx -> {
-			// returns a file from the server based on user's request
-			String path = ctx.queryParam("path");
-			HTTPHandler.requestFile(ctx, path);
-		});
 	}
 	
 }
