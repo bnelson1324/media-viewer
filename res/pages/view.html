@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Media Viewer</title>
+		<link href="style.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div id="header">
+			<h1>Media Viewer</h1>
+			<br>
+			<a href="/">Home</a>
+			<a href="/search">Search</a>
+			<a href="/view">View</a>
+			<a href="/modifytags">Modify Tags</a>
+			<a href="/settings">Settings</a>
+			<a href="/help">Help</a>
+		</div>
+
+
+		<div id="content">
+			<input type="search" id="pathBar">
+			<button onclick="showFile()">Open</button>
+			<br>
+			<div id="viewDisplay">
+
+			</div>
+		</div>
+
+		<!-- -->
+		<template id="mediaBoxTemplate">
+			<div class="mediaBox">
+				<p class="mediaText"></p>
+				<img class="mediaImage"></div>
+			</div>
+		</template>
+
+		<script src="scripts.js"></script>
+
+		<script>
+			document.getElementById('pathBar').onkeydown = function(event) {
+			    if (event.keyCode == 13) {
+			        showFile();
+			    }
+			}
+			// redirects user to the right page to view
+			function showFile() {
+				var path = document.getElementById("pathBar").value;
+				window.location.href = "/view?path=" + path;
+			}
+
+			window.onload = onLoadDisplay();
+			// display function called whenever the page loads
+			function onLoadDisplay() {
+				var urlSearchParams = new URLSearchParams(window.location.search);
+				var path = urlSearchParams.get("path");
+				if(path != null) {
+					changeViewDisplayItem(path);
+				}
+			}
+
+			function changeViewDisplayItem(path) {
+				var display = document.getElementById("viewDisplay");
+				display.appendChild(generateMediaBox(path, "image", 1200, 1200));
+			}
+		</script>
+
+	</body>
+</html>

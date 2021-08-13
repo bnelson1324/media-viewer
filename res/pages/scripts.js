@@ -5,3 +5,19 @@ function getChildByClass(parent, theClassName) {
 		}
 	}
 }
+
+// displaying media items
+function generateMediaBox(path, fileType, maxWidth, maxHeight) { // !! TODO: let this work with file types that aren't just images
+	// !! todo: let this work with file size
+	var template = document.getElementById("mediaBoxTemplate").content.cloneNode(true);
+
+	var mediaBox = getChildByClass(template, "mediaBox");
+
+	var mediaText = getChildByClass(mediaBox, "mediaText");
+	mediaText.innerHTML = path;
+
+	var mediaImage = getChildByClass(mediaBox, "mediaImage");
+	mediaImage.src = path;
+
+	return template;
+}

@@ -21,12 +21,25 @@
 			<input type="search" id="searchBar">
 			<button onclick="search()">Search</button>
 			<br>
-			<button onclick="addImageToDisplay('walter.png')">Add</button>
+
+			<!-- buttons for testing -->
+			<button onclick="document.getElementById('searchDisplay').appendChild(generateMediaBox('walter.png', 'image', 300, 300))">Add Walter</button> 
+			<button onclick="document.getElementById('searchDisplay').appendChild(generateMediaBox('walter2.png', 'image', 300, 300))">Add Walter2</button> 
 
 			<div id="searchDisplay">
 				<p>Display</p>
 			</div>
 		</div>
+
+		<!-- JS -->
+		<template id="mediaBoxTemplate">
+			<div class="mediaBox">
+				<p class="mediaText"></p>
+				<img class="mediaImage"></div>
+			</div>
+		</template>
+
+		<script src="scripts.js"></script>
 
 		<script>
 			document.getElementById('searchBar').onkeydown = function(event) {
@@ -46,48 +59,22 @@
 				var urlSearchParams = new URLSearchParams(window.location.search);
 				var query = urlSearchParams.get("q");
 				if(query != null) {
-				var req = new XMLHttpRequest();
+					var req = new XMLHttpRequest();
 					req.open("GET", "/searchresults?q=" + query);
 					req.send();
 					req.onreadystatechange=(e)=>{
 						if(req.readyState == 4) {
+							console.log(req.responseText);
 							var jsonResult = JSON.parse(req.responseText);
 							for(var i = 0; i < jsonResult.mediaItems.length; i++) {
 								var mediaItem = jsonResult.mediaItems[i];
-								addImageToDisplay(mediaItem.path);
+								document.getElementById('searchDisplay').appendChild(generateMediaBox(mediaItem.path, mediaItem.fileType, 300, 300));
 							}
-
-							// !! todo: get url of images from browser, then add them to the display using addImageToDisplay
-							// !! create a function to do the above using the same json format
 						}
 					}
 				}
 			}
-
-			function addImageToDisplay(path) {
-				var display = document.getElementById("searchDisplay");
-
-				var template = document.getElementById("mediaBoxTemplate").content.cloneNode(true);
-				var mediaBox = getChildByClass(template, "mediaBox");
-
-				var mediaText = getChildByClass(mediaBox, "mediaText");
-				mediaText.innerHTML = path;
-
-				var mediaImage = getChildByClass(mediaBox, "mediaImage");
-				mediaImage.src = path;
-
-				display.appendChild(template);
-			}
 		</script>
-
-		<script src="scripts.js"></script>
-
-		<template id="mediaBoxTemplate">
-			<div class="mediaBox">
-				<p class="mediaText"></p>
-				<img class="mediaImage"></div>
-			</div>
-		</template>
 
 	</body>
 </html>
